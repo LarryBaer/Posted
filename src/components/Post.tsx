@@ -71,9 +71,13 @@ const useStyles = makeStyles((theme: Theme) =>
       paddingLeft: "10px",
       outline: "none",
     },
-    post_btn: { color: "black", position: "static" },
+    post_btn: { 
+      color: "black", 
+      position: "static" 
+    },
     like_btn: {
       color: "red",
+      position: "static",
     },
   })
 );
