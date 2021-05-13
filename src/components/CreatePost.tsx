@@ -57,7 +57,7 @@ interface CreatePostInterface {
 
 function CreatePost({ getPosts }: CreatePostInterface) {
   const classes = useStyles();
-  const [postName, setPostName] = useState("");
+  const [postName, setPostName] = useState("Poster44");
   const [postDescription, setPostDescription] = useState("");
   const [postImage, setPostImage] = useState<any>("");
 

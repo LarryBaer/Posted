@@ -1,11 +1,13 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { createStyles, Theme, makeStyles, IconButton } from "@material-ui/core";
 
 // Import icons
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 import ChatBubbleOutlineOutlinedIcon from "@material-ui/icons/ChatBubbleOutlineOutlined";
 import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
+import EmojiEmotionsIcon from "@material-ui/icons/EmojiEmotions";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -35,7 +37,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     post_image_container: {},
     post_image: {
-      minWidth:"100%",
+      minWidth: "100%",
       maxWidth: "100%",
       ["@media (max-width:650px)"]: {
         width: "100%",
@@ -70,17 +72,34 @@ const useStyles = makeStyles((theme: Theme) =>
       outline: "none",
     },
     post_btn: { color: "black", position: "static" },
+    like_btn: {
+      color: "red",
+    },
   })
 );
 
-interface PostInterface2{
-  postName:any,
-  postDescription:any,
-  postImage:any,
+interface PostInterface2 {
+  postName: any;
+  postDescription: any;
+  postImage: any;
 }
 
-function Post({postName, postDescription, postImage}: PostInterface2) {
+function Post({ postName, postDescription, postImage }: PostInterface2) {
   const classes = useStyles();
+  const [likeBtn, setLikeBtn] = useState(
+    <IconButton disableRipple className={classes.post_btn} onClick={likePost}>
+      <FavoriteBorderIcon />
+    </IconButton>
+  );
+
+  function likePost(e: any) {
+    setLikeBtn(
+      <IconButton disableRipple className={classes.like_btn}>
+        <FavoriteIcon />
+      </IconButton>
+    );
+  }
+
   return (
     <div className={classes.post_container}>
       <div className={classes.post}>
@@ -91,12 +110,14 @@ function Post({postName, postDescription, postImage}: PostInterface2) {
           <div className={classes.post_header_name}>{postName}</div>
         </div>
         <div className={classes.post_image_container}>
-          <img className={classes.post_image} src={postImage} alt="Post Image"></img>
+          <img
+            className={classes.post_image}
+            src={postImage}
+            alt="Post Image"
+          ></img>
         </div>
         <div className={classes.post_buttons}>
-          <IconButton disableRipple className={classes.post_btn}>
-            <FavoriteBorderIcon />
-          </IconButton>
+          {likeBtn}
           <IconButton disableRipple className={classes.post_btn}>
             <ChatBubbleOutlineOutlinedIcon />
           </IconButton>
@@ -105,9 +126,7 @@ function Post({postName, postDescription, postImage}: PostInterface2) {
           </IconButton>
         </div>
         <div className={classes.post_description_container}>
-          <p className={classes.post_description}>
-              {postDescription}
-          </p>
+          <p className={classes.post_description}>{postDescription}</p>
         </div>
         <div className={classes.create_comment}>
           <form>

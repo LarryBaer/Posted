@@ -121,6 +121,7 @@ function Login() {
               <TextField
                 onChange={(e) => setUsername(e.target.value)}
                 value={username}
+                autoComplete="off"
                 id="outlined-basic"
                 label="Username"
                 variant="outlined"
@@ -130,6 +131,7 @@ function Login() {
               <TextField
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
+                autoComplete="off"
                 id="password outlined-basic"
                 label="Password"
                 variant="outlined"
